@@ -9,18 +9,24 @@ export default function HomePage() {
         <Container>
             <HeaderComponent/>
             <ProductContainer>
-               { pokeProducts.map ((i) =>
-                <li> 
-                    <img src={i.image}/>
-                    <p>{i.name}</p>
-                    <p>{i.type}{(i.type2) ? `/ ${i.type2}`: ""}</p>
-                    <p>{`R$${i.value.toFixed(2)}`}</p>
-                    <p>Add ao Carrinho</p>
-                    <button>+</button>
-                </li>)}
+               { pokeProducts.map ((i, idx) =>
+                  <PokeCard key={idx} item={i} />)}
             </ProductContainer>
             <Footer/>
         </Container>
        
+    )
+}
+
+function PokeCard ({item}) {
+    return (
+       <div>
+            <img alt={item.name} src={item.image}/>
+            <p>{item.name}</p>
+            <p>{item.type}{(item.type2) ? `/ ${item.type2}`: ""}</p>
+            <p>{`R$${item.value.toFixed(2)}`}</p>
+            <p>Add ao Carrinho</p>
+            <button>+</button>
+         </div>
     )
 }

@@ -37,12 +37,12 @@ export const StyledFooter = styled.div`
         margin: auto 0;
     }
 `
-export const ProductContainer = styled.ul`
+export const ProductContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    li {
+    div {
         width: 170px;
         height: 270px;
         margin: 15px 15px;
