@@ -5,16 +5,23 @@ import { pokeProducts } from "../assets/mockDados.js"
 import {Footer, HeaderComponent} from "../Constants/components.js"
 import { CarrinhoContainer, Container, ContentContainer, ProductContainer} from "../Constants/styledComponents.js"
 
-
+let soma = 0;
 export default function HomePage() {
 
     const [cartProducts, setCartProducts] = useState([]);
-
+     console.log(cartProducts)
     totalCart();
+
     function totalCart () {
         const arr = [];
+        soma = 0 ;
+        
         cartProducts.forEach((i) => {
          arr.push(i.value * i.amount)
+        })
+        arr.forEach((i) => {
+            soma += i;
+            console.log(soma)
         })
 
     }
@@ -55,7 +62,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 )}
-                <p></p>
+                <p>Total: {soma.toFixed(2)}</p>
             </CarrinhoContainer>
             </ContentContainer>
            
