@@ -2,7 +2,6 @@ import styled from "styled-components"
 
 
 export const Container = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
     font-family: 'Fira Mono', monospace;
     font-size: 15px;
     justify-content: center;

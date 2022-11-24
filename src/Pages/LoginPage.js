@@ -39,6 +39,7 @@ const LoginBox = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+    
 
     .inputs {
       width: 360px;
@@ -47,6 +48,8 @@ const LoginBox = styled.div`
       margin-top: 8px;
       border: 1px solid #c6c6c6;
       font-size: 22px;
+      font-family: 'Fira Mono', monospace;
+      
     }
 
     button {
@@ -55,6 +58,7 @@ const LoginBox = styled.div`
       border: 1px solid #c6c6c6;
       border-radius: 5px;
       font-size: 22px;
+      font-family: 'Fira Mono', monospace;
     }
   }
 
@@ -63,6 +67,7 @@ const LoginBox = styled.div`
     border: none;
     font-size: 16px;
     background-color: red;
+    font-family: 'Fira Mono', monospace;
 
     :hover {
       text-decoration: underline;
