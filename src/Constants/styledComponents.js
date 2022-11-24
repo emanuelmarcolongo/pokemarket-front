@@ -40,6 +40,10 @@ export const StyledFooter = styled.div`
     p {
         width: 300px;
         margin: auto 0;
+        text-align: justify;
+        strong {
+            font-weight: 700;
+        }
     }
 `
 export const ProductContainer = styled.div`
