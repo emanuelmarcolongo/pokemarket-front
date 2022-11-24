@@ -5,9 +5,33 @@ import { pokeProducts } from "../assets/mockDados.js"
 import {Footer, HeaderComponent} from "../Constants/components.js"
 import { CarrinhoContainer, Container, ContentContainer, ProductContainer} from "../Constants/styledComponents.js"
 
+
 export default function HomePage() {
 
     const [cartProducts, setCartProducts] = useState([]);
+
+    totalCart();
+    function totalCart () {
+        const arr = [];
+        cartProducts.forEach((i) => {
+         arr.push(i.value * i.amount)
+        })
+
+    }
+    function handleSub (item, id) {
+        if(item.amount === 1){
+            const newCart = cartProducts.filter((i) => item.id !== id);
+            setCartProducts([...newCart]);
+            return;
+        }
+         item.amount--;
+         setCartProducts([...cartProducts])
+    }
+
+    function handleSum(item) {
+        item.amount++;
+        setCartProducts([...cartProducts])
+    }
 
     return (
         <Container>
@@ -18,7 +42,22 @@ export default function HomePage() {
                   <PokeCard cart={cartProducts} setCart={setCartProducts} key={idx} item={i} />)}
             </ProductContainer>
             <CarrinhoContainer>
-                <p>Carrinho</p>
+                <p>Carrinho:</p>
+                {cartProducts.map((i, idx) => 
+                <div key={idx}>
+                    <img src={i.image}/>
+                    <div>
+                        <p>Preço: R${i.value.toFixed(2)}</p>
+                        <p>Quantidade: {i.amount}</p>
+                        <p>Total: {(i.value*i.amount).toFixed(2)}</p>
+                        <div>
+                            <button onClick={()=> handleSub(i, i.id)}>-</button>
+                            <button onClick={()=> handleSum(i, i.id)}>+</button>
+                        </div>
+                    </div>
+                </div>
+                )}
+                <p></p>
             </CarrinhoContainer>
             </ContentContainer>
            
@@ -39,8 +78,8 @@ function PokeCard ({item, cart, setCart}) {
             setSelected(false);
            
         } else if (!selected) {
-            cart.push(item);
-            setCart([...cart]);
+            const newItem = {...item, amount: 1}
+            setCart([...cart, newItem]);
             setSelected(true);
         }
 
