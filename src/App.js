@@ -12,9 +12,9 @@ function App() {
       <BrowserRouter>
         <GlobalStyle/>
         <Routes>
-          <Route path="/home" element={ <HomePage/>} />
+          <Route path="/" element={ <HomePage/>} />
           <Route path="/cadastro" element={ <SignUpPage/>} />
-          <Route path="/" element={ <LoginPage/>} />
+          <Route path="/login" element={ <LoginPage/>} />
           <Route path="/carrinho" element={ <CartPage/> } />
         </Routes>
       </BrowserRouter>
