@@ -2,8 +2,8 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { pokeProducts } from "../assets/mockDados.js"
-import {Footer, HeaderComponent} from "../Constants/components.js"
-import { Container, ProductContainer} from "../Constants/styledComponents.js"
+import {Footer, HeaderComponent} from "../Components/components.js"
+import { Container, ProductContainer} from "../Components/styledComponents.js"
 
 export default function HomePage() {
 

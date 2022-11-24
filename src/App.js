@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CartPage from "./componentPages/cartPage.js";
-import HomePage from "./componentPages/homePage.js";
-import LoginPage from "./componentPages/loginPage.js";
-import SignUpPage from "./componentPages/signupPage.js";
-import GlobalStyle from "./Constants/globalStyles.js"
+import CartPage from "./Pages/CartPage.js";
+import HomePage from "./Pages/HomePage.js";
+import LoginPage from "./Pages/LoginPage.js";
+import SignUpPage from "./Pages/SignUpPage.js";
+import GlobalStyle from "./Components/globalStyles.js"
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <GlobalStyle/>
         <Routes>
           <Route path="/home" element={ <HomePage/>} />
-          <Route path="/sign-up" element={ <SignUpPage/>} />
+          <Route path="/cadastro" element={ <SignUpPage/>} />
           <Route path="/" element={ <LoginPage/>} />
           <Route path="/carrinho" element={ <CartPage/> } />
         </Routes>
