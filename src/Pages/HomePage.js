@@ -2,33 +2,90 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { pokeProducts } from "../assets/mockDados.js"
-import {Footer, HeaderComponent} from "../Components/components.js"
-import { Container, ProductContainer} from "../Components/styledComponents.js"
+import {Footer, HeaderComponent} from "../Constants/components.js"
+import { CarrinhoContainer, Container, ContentContainer, ProductContainer} from "../Constants/styledComponents.js"
 
+let soma = 0;
 export default function HomePage() {
+
+    const [cartProducts, setCartProducts] = useState([]);
+     console.log(cartProducts)
+    totalCart();
+
+    function totalCart () {
+        const arr = [];
+        soma = 0 ;
+        
+        cartProducts.forEach((i) => {
+         arr.push(i.value * i.amount)
+        })
+        arr.forEach((i) => {
+            soma += i;
+            console.log(soma)
+        })
+
+    }
+    function handleSub (item, id) {
+        if(item.amount === 1){
+            return;
+        }
+         item.amount--;
+         setCartProducts([...cartProducts])
+    }
+
+    function handleSum(item) {
+        item.amount++;
+        setCartProducts([...cartProducts])
+    }
 
     return (
         <Container>
             <HeaderComponent/>
+            <ContentContainer>
             <ProductContainer>
                { pokeProducts.map ((i, idx) =>
-                  <PokeCard key={idx} item={i} />)}
+                  <PokeCard cart={cartProducts} setCart={setCartProducts} key={idx} item={i} />)}
             </ProductContainer>
+            <CarrinhoContainer>
+                <p>Carrinho:</p>
+                {cartProducts.map((i, idx) => 
+                <div key={idx}>
+                    <img src={i.image}/>
+                    <div>
+                        <p>Preço: R${i.value.toFixed(2)}</p>
+                        <p>Quantidade: {i.amount}</p>
+                        <p>Total: {(i.value*i.amount).toFixed(2)}</p>
+                        <div>
+                            <button onClick={()=> handleSub(i, i.id)}>-</button>
+                            <button onClick={()=> handleSum(i, i.id)}>+</button>
+                        </div>
+                    </div>
+                </div>
+                )}
+                <p>Total: {soma.toFixed(2)}</p>
+            </CarrinhoContainer>
+            </ContentContainer>
+           
             <Footer/>
         </Container>
        
     )
 }
 
-function PokeCard ({item}) {
+function PokeCard ({item, cart, setCart}) {
 
     const [selected, setSelected] = useState(false);
 
-    function clickProduct () {
+    function clickProduct (item, id) {
         if (selected) {
-            setSelected(false)
+            const newCart = cart.filter((i) => i.id !== id);
+            setCart([...newCart]);
+            setSelected(false);
+           
         } else if (!selected) {
-            setSelected(true)
+            const newItem = {...item, amount: 1}
+            setCart([...cart, newItem]);
+            setSelected(true);
         }
 
     }
@@ -40,7 +97,7 @@ function PokeCard ({item}) {
             <p>{item.type}{(item.type2) ? ` | ${item.type2}`: ""}</p>
             <p>{`R$${item.value.toFixed(2)}`}</p>
             <p>{(selected) ? "Remover do carrinho" :  "Adicionar ao carrinho"}</p>
-            <button onClick={()=> clickProduct()}>+</button>
+            <button onClick={()=> clickProduct(item, item.id)}>+</button>
          </ProductCard>
     )
 }
@@ -54,6 +111,7 @@ width: 170px;
         align-items: flex-start;
         border: 2px solid gray;
         border-radius: 15px;
+        box-shadow: 3px 3px 3px 3px #ccc;
         p {
             margin-left: 15px;
         }

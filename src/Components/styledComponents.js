@@ -53,3 +53,26 @@ export const ProductContainer = styled.div`
     flex-wrap: wrap;
     width: 70%;
 `
+export const CarrinhoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    p {
+        font-weight: 700;
+        font-size: 30px;
+    }
+    > div {
+        display: flex;
+        border: 1px solid black;
+        img {
+            width: 100px;
+        }
+        p {
+            font-size: 15px;
+        }
+    }
+`
+
+export const ContentContainer = styled.div`
+    display: flex;
+`
