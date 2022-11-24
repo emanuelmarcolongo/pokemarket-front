@@ -20,8 +20,6 @@ export default function HomePage() {
     }
     function handleSub (item, id) {
         if(item.amount === 1){
-            const newCart = cartProducts.filter((i) => item.id !== id);
-            setCartProducts([...newCart]);
             return;
         }
          item.amount--;
