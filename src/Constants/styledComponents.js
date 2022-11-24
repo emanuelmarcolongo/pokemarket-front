@@ -23,11 +23,16 @@ export const Header = styled.div`
         font-weight: 700;
         font-size: 25px;
     }
-    box-shadow: 5px 5px #ccc;
+    box-shadow: 5px 5px 5px 5px #ccc;
+    margin-bottom: 15px;
 `
 
 export const StyledFooter = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 5px 15px #ccc;
+    margin-top: 15px;
     img {
         width: 200px;
         height: 180px;
@@ -42,6 +47,7 @@ export const ProductContainer = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    width: 70%;
     div {
         width: 170px;
         height: 270px;
