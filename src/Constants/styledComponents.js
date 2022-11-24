@@ -53,3 +53,11 @@ export const ProductContainer = styled.div`
     flex-wrap: wrap;
     width: 70%;
 `
+export const CarrinhoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+export const ContentContainer = styled.div`
+    display: flex;
+`

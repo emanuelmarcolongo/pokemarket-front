@@ -3,32 +3,45 @@ import { useState } from "react"
 import styled from "styled-components"
 import { pokeProducts } from "../assets/mockDados.js"
 import {Footer, HeaderComponent} from "../Constants/components.js"
-import { Container, ProductContainer} from "../Constants/styledComponents.js"
+import { CarrinhoContainer, Container, ContentContainer, ProductContainer} from "../Constants/styledComponents.js"
 
 export default function HomePage() {
+
+    const [cartProducts, setCartProducts] = useState([]);
 
     return (
         <Container>
             <HeaderComponent/>
+            <ContentContainer>
             <ProductContainer>
                { pokeProducts.map ((i, idx) =>
-                  <PokeCard key={idx} item={i} />)}
+                  <PokeCard cart={cartProducts} setCart={setCartProducts} key={idx} item={i} />)}
             </ProductContainer>
+            <CarrinhoContainer>
+                <p>Carrinho</p>
+            </CarrinhoContainer>
+            </ContentContainer>
+           
             <Footer/>
         </Container>
        
     )
 }
 
-function PokeCard ({item}) {
+function PokeCard ({item, cart, setCart}) {
 
     const [selected, setSelected] = useState(false);
 
-    function clickProduct () {
+    function clickProduct (item, id) {
         if (selected) {
-            setSelected(false)
+            const newCart = cart.filter((i) => i.id !== id);
+            setCart([...newCart]);
+            setSelected(false);
+           
         } else if (!selected) {
-            setSelected(true)
+            cart.push(item);
+            setCart([...cart]);
+            setSelected(true);
         }
 
     }
@@ -40,7 +53,7 @@ function PokeCard ({item}) {
             <p>{item.type}{(item.type2) ? ` | ${item.type2}`: ""}</p>
             <p>{`R$${item.value.toFixed(2)}`}</p>
             <p>{(selected) ? "Remover do carrinho" :  "Adicionar ao carrinho"}</p>
-            <button onClick={()=> clickProduct()}>+</button>
+            <button onClick={()=> clickProduct(item, item.id)}>+</button>
          </ProductCard>
     )
 }
