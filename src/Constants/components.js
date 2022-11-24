@@ -1,6 +1,6 @@
 import { Header, StyledFooter } from "../Constants/styledComponents.js";
-import pokemon from "../assets/pokemon.png"
-import rocket from "../assets/rocket.png"
+import pokemon from "../assets/img/pokemon.png"
+import rocket from "../assets/img/rocket.png"
 
 export function HeaderComponent() {
     return (
@@ -15,7 +15,7 @@ export function Footer () {
     return (
     <StyledFooter>
         <img alt = "equipe rocket" src={rocket} />
-        <p>Sobre nós: Equipe rocket decolando de novo!<br></br>
+        <p><strong>Equipe rocket decolando de novo!</strong><br></br>
             Agora lançando nosso e-commerce <strong>PokeMarket</strong>:<br></br>
             Um lugar onde você pode obter seu tão sonhado pokemon sem precisar se aventurar mundo a fora!
         </p>

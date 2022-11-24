@@ -54,6 +54,7 @@ width: 170px;
         align-items: flex-start;
         border: 2px solid gray;
         border-radius: 15px;
+        box-shadow: 3px 3px 3px 3px #ccc;
         p {
             margin-left: 15px;
         }
