@@ -1,4 +1,4 @@
-import { Header, StyledFooter } from "../Constants/styledComponents.js";
+import { Header, StyledFooter } from "../Components/styledComponents.js";
 import pokemon from "../assets/img/pokemon.png"
 import rocket from "../assets/img/rocket.png"
 
