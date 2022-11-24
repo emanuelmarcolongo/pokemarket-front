@@ -37,3 +37,37 @@ export const StyledFooter = styled.div`
         margin: auto 0;
     }
 `
+export const ProductContainer = styled.ul`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    li {
+        width: 170px;
+        height: 270px;
+        margin: 15px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 2px solid gray;
+        border-radius: 15px;
+        p {
+            margin-left: 15px;
+        }
+        img {
+            width: 170px;
+            height: 170px;
+        }
+        button {
+            margin: 0 auto;
+            background-color: gray;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            :hover {
+                background-color: greenyellow;
+            }
+            font-size: 25px;
+        }
+    }
+`
