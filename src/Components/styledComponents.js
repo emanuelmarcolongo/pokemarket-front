@@ -53,6 +53,7 @@ export const ProductContainer = styled.div`
     width: 70%;
 `
 export const CarrinhoContainer = styled.div`
+    font-family: 'Fira Mono', monospace;
     display: flex;
     flex-direction: column;
     width: 20%;
@@ -69,6 +70,10 @@ export const CarrinhoContainer = styled.div`
         p {
             font-size: 15px;
         }
+    }
+    button {
+        font-family: 'Fira Mono', monospace;
+        height: 3%;
     }
 `
 

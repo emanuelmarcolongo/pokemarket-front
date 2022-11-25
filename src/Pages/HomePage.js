@@ -1,16 +1,31 @@
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { pokeProducts } from "../assets/mockDados.js"
 import {Footer, HeaderComponent} from "../Components/components.js"
 import { CarrinhoContainer, Container, ContentContainer, ProductContainer} from "../Components/styledComponents.js"
 
 let soma = 0;
-export default function HomePage() {
-
+export default function HomePage({saleInfo}) {
+    const navigate = useNavigate();
     const [cartProducts, setCartProducts] = useState([]);
-     console.log(cartProducts)
+
     totalCart();
+
+
+    function handleCheckout() {
+       
+        if (cartProducts.length === 0) {
+            alert("Adicione ao menos um item ao seu carrinho antes de prosseguir");
+            return;
+        }
+
+        saleInfo.products = [...cartProducts];
+        saleInfo.total = Number(soma);
+        console.log(saleInfo);
+        navigate("/checkout");
+    }
 
     function totalCart () {
         const arr = [];
@@ -21,9 +36,7 @@ export default function HomePage() {
         })
         arr.forEach((i) => {
             soma += i;
-            console.log(soma)
         })
-
     }
     function handleSub (item, id) {
         if(item.amount === 1){
@@ -50,7 +63,7 @@ export default function HomePage() {
                 <p>Carrinho:</p>
                 {cartProducts.map((i, idx) => 
                 <div key={idx}>
-                    <img src={i.image}/>
+                    <img alt={i.name} src={i.image}/>
                     <div>
                         <p>Preço: R${i.value.toFixed(2)}</p>
                         <p>Quantidade: {i.amount}</p>
@@ -63,6 +76,8 @@ export default function HomePage() {
                 </div>
                 )}
                 <p>Total: {soma.toFixed(2)}</p>
+
+                <button onClick={handleCheckout}>Prosseguir para o checkout</button>
             </CarrinhoContainer>
             </ContentContainer>
            
