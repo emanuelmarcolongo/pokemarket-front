@@ -1,0 +1,1 @@
+export const URL_BASE = "https://pokemarket-back.onrender.com"
