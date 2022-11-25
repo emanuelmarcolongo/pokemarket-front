@@ -1,16 +1,41 @@
-import { Container } from "../Components/styledComponents.js";
-import styled from "styled-components";
+import { Container, LoginBox } from "../Components/styledComponents.js";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [enable, setEnable] = useState(false);
+
+  function loginUser(e) {
+    e.preventDefault();
+    setEnable(true);
+  }
+
   return (
     <Container>
       <LoginBox>
         <p>Olá, digite seu e-mail e senha</p>
-        <form>
-          <input className="inputs" placeholder="email" />
-          <input className="inputs" placeholder="senha" />
-          <button>Entrar</button>
+        <form onSubmit={loginUser}>
+          <input
+            className="inputs"
+            placeholder="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={enable}
+            required
+          />
+          <input
+            className="inputs"
+            placeholder="senha"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={enable}
+            required
+          />
+          <button type="submit">Entrar</button>
         </form>
         <Link to="/cadastro">
           <button className="button_sign-up">
@@ -21,60 +46,3 @@ export default function LoginPage() {
     </Container>
   );
 }
-
-const LoginBox = styled.div`
-  background-color: red;
-  width: 480px;
-  height: 530px;
-  border-radius: 8px;
-  margin: 0 auto;
-  margin-top: 100px;
-  font-size: 26px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    
-
-    .inputs {
-      width: 360px;
-      height: 48px;
-      border-radius: 5px;
-      margin-top: 8px;
-      border: 1px solid #c6c6c6;
-      font-size: 22px;
-      font-family: 'Fira Mono', monospace;
-      
-    }
-
-    button {
-      margin-top: 15px;
-      height: 52px;
-      border: 1px solid #c6c6c6;
-      border-radius: 5px;
-      font-size: 22px;
-      font-family: 'Fira Mono', monospace;
-    }
-  }
-
-  .button_sign-up {
-    margin-top: 30px;
-    border: none;
-    font-size: 16px;
-    background-color: red;
-    font-family: 'Fira Mono', monospace;
-
-    :hover {
-      text-decoration: underline;
-    }
-  }
-
-  button:hover {
-    cursor: pointer;
-  }
-`;
