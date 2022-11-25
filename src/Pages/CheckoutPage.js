@@ -2,13 +2,19 @@ import styled from "styled-components"
 import { Footer, HeaderComponent } from "../Components/components.js"
 import { Container } from "../Components/styledComponents.js"
 import dayjs from "dayjs"
+import { useState } from "react"
 
 export default function CheckoutPage({saleInfo}) {
 
-    const adress = {rua: "", cidade: "", estado: "", cep: "", numero: ""}
+    const [adress, setAdress] = useState({rua: "", cidade: "", estado: "", cep: "", numero: ""})
+
+  
 
     function handleCheckout(e) {
         e.preventDefault();
+        setAdress({
+            ...adress,
+            [e.target.name]: e.target.value}) 
         saleInfo.adress = adress;
         saleInfo.time = dayjs().format('DD/MM/YYYY  HH:mm');
         console.log(saleInfo)
@@ -34,11 +40,11 @@ export default function CheckoutPage({saleInfo}) {
             <InfoAdress>
                      <form onSubmit={handleCheckout}>
                     <p>Informações de entrega:</p>
-                    <input type="string" requiredtrue onChange={e => adress.cidade = e.target.value} placeholder="Digite sua cidade"></input>
-                    <input type="string" required  onChange={e => adress.estado = e.target.value} placeholder="Digite seu estado"></input>
-                    <input type="string" required  onChange={e => adress.cep = e.target.value} placeholder="Digite seu CEP"></input>
-                    <input type="string" required  onChange={e => adress.rua = e.target.value} placeholder="Digite sua Rua"></input>
-                    <input type="string" required  onChange={e => adress.numero = e.target.value} placeholder="Digite seu Número"></input>
+                    <input name="cidade" value={adress.cidade} type="string" requiredtrue onChange={handleCheckout} placeholder="Digite sua cidade"></input>
+                    <input name="estado" value={adress.estado} type="string" required  onChange={handleCheckout} placeholder="Digite seu estado"></input>
+                    <input name="cep" value={adress.cep} type="string" required onChange={handleCheckout} placeholder="Digite seu CEP"></input>
+                    <input name="rua" value={adress.rua} type="string" required  onChange={handleCheckout} placeholder="Digite sua Rua"></input>
+                    <input name="numero" value={adress.numero} type="string" required  onChange={handleCheckout} placeholder="Digite seu Número"></input>
                     <p>Forma de pagamento:</p>
                     <input type="string" onChange={e => saleInfo.paymentMethod = e.target.value} placeholder="Qual a forma de pagamento?"></input>
                     
