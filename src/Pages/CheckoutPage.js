@@ -2,12 +2,16 @@ import styled from "styled-components";
 import { Footer, HeaderComponent } from "../Components/components.js";
 import { Container } from "../Components/styledComponents.js";
 import dayjs from "dayjs";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
+import { AuthContext } from "../Providers/Auth.js";
 
 
 export default function CheckoutPage({ saleInfo }) {
+
+  const {userData} = React.useContext(AuthContext);
+
   const [adress, setAdress] = useState({
     rua: "",
     cidade: "",
@@ -25,7 +29,7 @@ export default function CheckoutPage({ saleInfo }) {
     saleInfo.adress = adress;
     saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
    
-    axios.post(`${URL_BASE}/sale`, saleInfo).then(
+    axios.post(`${URL_BASE}/sale`, saleInfo, { headers: { Authorization: `Bearer ${userData.token}`} }).then(
         (res) => {
             console.log(res.data);
         }
