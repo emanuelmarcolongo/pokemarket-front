@@ -4,6 +4,7 @@ import CheckoutPage from "../Pages/CheckoutPage.js";
 import HomePage from "../Pages/HomePage.js";
 import LoginPage from "../Pages/LoginPage.js";
 import SignUpPage from "../Pages/SignUpPage.js";
+import MyProfilePage from "../Pages/MyProfilePage.js";
 import GlobalStyle from "./globalStyles.js"
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={ <LoginPage saleInfo={saleInfo}/>} />
           <Route path="/carrinho" element={ <CartPage saleInfo={saleInfo}/> } />
           <Route path="/checkout" element={ <CheckoutPage saleInfo={saleInfo}/> } />
+          <Route path="/perfil" element={ <MyProfilePage saleInfo={saleInfo}/> } />
         </Routes>
       </BrowserRouter>
     </div>
