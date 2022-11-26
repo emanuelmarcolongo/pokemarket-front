@@ -1,41 +1,55 @@
 import { Container } from "../Components/styledComponents.js";
 import { HeaderComponent, ProfileItens } from "../Components/components.js";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AuthContext } from "../Providers/Auth.js";
+import React from "react";
+import UserData from "../Components/UserData.js";
+import { useNavigate } from "react-router-dom";
 
 export default function MyProfilePage() {
-  const [sideBarSelected, setSideBarSelected] = useState("Seus Dados");
-  const [selectedItem, setSelectedItem] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("Seus Dados");
+  const { userData } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData.token === undefined) {
+      navigate("/");
+    }
+  }, []);
+
+  function handleButton(name) {
+    setSelectedItem(name);
+  }
   return (
     <Container>
       <HeaderComponent />
       <MyProfileSection>
         <SideBar>
           <ul className="sidebar">
-            <ProfileItens
-              name="Seus Dados"
-              icon="person-circle-outline"
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-            />
-            <ProfileItens
-              name="Endereço"
-              icon="home-outline"
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-            />
-            <ProfileItens
-              name="Pedidos"
-              icon="cart-outline"
-              setSelectedItem={setSelectedItem}
-              selectedItem={selectedItem}
-            />
+            <ItensSideBar disable={selectedItem === "Seus Dados" ? "" : "none"}>
+              <div className="line" />
+              <ion-icon name="person-circle-outline"></ion-icon>
+              <button onClick={() => handleButton("Seus Dados")}>
+                Seus Dados
+              </button>
+            </ItensSideBar>
+
+            <ItensSideBar disable={selectedItem === "Endereço" ? "" : "none"}>
+              <div className="line" />
+              <ion-icon name="home-outline"></ion-icon>
+              <button onClick={() => handleButton("Endereço")}>Endereço</button>
+            </ItensSideBar>
+
+            <ItensSideBar disable={selectedItem === "Pedidos" ? "" : "none"}>
+              <div className="line" />
+              <ion-icon name="cart-outline"></ion-icon>
+              <button onClick={() => handleButton("Pedidos")}>Pedidos</button>
+            </ItensSideBar>
           </ul>
         </SideBar>
 
-        <DataDiv>
-          <p>{sideBarSelected}</p>
-        </DataDiv>
+        <UserData nameSelected={selectedItem} />
       </MyProfileSection>
     </Container>
   );
@@ -60,11 +74,39 @@ const SideBar = styled.div`
   }
 `;
 
-const DataDiv = styled.div`
-  height: 450px;
-  width: 520px;
-  border-radius: 5px;
-  margin-left: 150px;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+const ItensSideBar = styled.li`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 180px;
+  height: 50px;
+  border-bottom: 1px solid #c6c6c6;
+
+  ion-icon {
+    font-size: 26px;
+  }
+
+  :last-child {
+    border: none;
+  }
+  .line {
+    background-color: rgba(100, 100, 100);
+    width: 6px;
+    height: 38px;
+    border-radius: 10px;
+    display: ${(props) => props.disable};
+  }
+
+  button {
+    width: 120px;
+    text-align: left;
+    border: none;
+    background-color: #ffffff;
+    font-size: 18px;
+
+    :hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 `;

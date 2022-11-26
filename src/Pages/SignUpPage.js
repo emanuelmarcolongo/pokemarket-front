@@ -1,5 +1,5 @@
 import { Container, LoginBox } from "../Components/styledComponents.js";
-import styled from "styled-components";
+import { HeaderComponent } from "../Components/components.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -40,55 +40,78 @@ export default function SignUpPage() {
 
   return (
     <Container>
-      <LoginBox>
+      <HeaderComponent />
+      <LoginBox checkPassword={password === passwordCheck ? "none" : ""}>
         <p>Preencha todos os campos para realizar o cadastro</p>
         <form onSubmit={signUpUser}>
-          <input
-            className="inputs"
-            type="text"
-            placeholder="Nome usuario"
-            value={name}
-            onChange={(e) => setname(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <input
-            className="inputs"
-            type="text"
-            placeholder="Url avatar"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <input
-            className="inputs"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <input
-            className="inputs"
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <input
-            className="inputs"
-            type="password"
-            placeholder="Confirmação de senha"
-            value={passwordCheck}
-            onChange={(e) => setPasswordCheck(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <button type="submit" disabled={enable}>Cadastrar</button>
+          <div className="label-input">
+            <label for="name">Nome Usuario</label>
+            <input
+              className="inputs"
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+
+          <div className="label-input">
+            <label for="url">Url Avatar</label>
+            <input
+              className="inputs"
+              id="url"
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+
+          <div className="label-input">
+            <label for="email">Email</label>
+            <input
+              className="inputs"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+
+          <div className="label-input">
+            <label for="password">Senha</label>
+            <input
+              className="inputs"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+
+          <div className="label-input">
+            <label for="passwordCheck">Confirme sua Senha</label>
+            <input
+              className="inputs"
+              id="passwordCheck"
+              type="password"
+              value={passwordCheck}
+              onChange={(e) => setPasswordCheck(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+          <p className="check-password">Senhas não conferem</p>
+          <button type="submit" disabled={enable}>
+            Cadastrar
+          </button>
         </form>
         <Link to="/">
           <button className="button_sign-up">
@@ -99,4 +122,3 @@ export default function SignUpPage() {
     </Container>
   );
 }
-

@@ -19,43 +19,43 @@ export const Header = styled.div`
     align-items: center;
     justify-content: center;
 
-    p{
-        font-size: 16px;
-        font-weight: 400;
-        text-align: center;
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
     }
 
-    ion-icon{
-        font-size: 60px;
-        border: 1px solid black;
-        border-radius: 100%;
-        display:${(props) => props.disableIcon}
+    ion-icon {
+      font-size: 60px;
+      border: 1px solid black;
+      border-radius: 100%;
+      display: ${(props) => props.disableIcon};
     }
     .avatar-user {
       border-radius: 100%;
       width: 60px;
       height: 60px;
       margin-right: 8px;
-      display:${(props) => props.disableAvatar}
+      display: ${(props) => props.disableAvatar};
     }
 
-    .myProfile-logout{
-        display: flex;
-        flex-direction: column;
+    .myProfile-logout {
+      display: flex;
+      flex-direction: column;
 
-        button{
-            border: none;
-            width: 90px;
-            margin: 5px 0;
-            background-color: #FFFFFF;
-            font-size: 12px;
-            font-family: "Fira Mono", monospace;
+      button {
+        border: none;
+        width: 90px;
+        margin: 5px 0;
+        background-color: #ffffff;
+        font-size: 12px;
+        font-family: "Fira Mono", monospace;
 
-            :hover{
-                cursor: pointer;
-                text-decoration: underline
-            }
+        :hover {
+          cursor: pointer;
+          text-decoration: underline;
         }
+      }
     }
   }
 
@@ -151,14 +151,33 @@ export const LoginBox = styled.div`
     flex-direction: column;
     margin-top: 30px;
 
+    .label-input {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #c6c6c6;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+
     .inputs {
       width: 360px;
-      height: 48px;
+      height: 35px;
       border-radius: 5px;
-      margin-top: 8px;
-      border: 1px solid #c6c6c6;
+      border: none;
       font-size: 22px;
       font-family: "Fira Mono", monospace;
+
+      textarea:focus,
+      :focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+      }
     }
 
     button {
@@ -169,6 +188,13 @@ export const LoginBox = styled.div`
       font-size: 22px;
       font-family: "Fira Mono", monospace;
     }
+  }
+
+  .check-password{
+    font-size: 16px;
+    color: red;
+    margin-top: 5px;
+    display: ${(props) => props.checkPassword}
   }
 
   .button_sign-up {

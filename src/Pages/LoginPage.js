@@ -1,5 +1,5 @@
 import { Container, LoginBox } from "../Components/styledComponents.js";
-import {HeaderComponent} from '../Components/components.js'
+import { HeaderComponent } from "../Components/components.js";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
@@ -25,10 +25,10 @@ export default function LoginPage({ saleInfo }) {
     axios
       .post(`${URL_BASE}/login`, newLogin)
       .then((res) => {
-        const {token, name, email} = res.data
+        const { token, name, email } = res.data;
         saleInfo.name = name;
         saleInfo.email = email;
-        setUserData(res.data)
+        setUserData(res.data);
         navigate("/home");
       })
       .catch((err) => {
@@ -43,24 +43,30 @@ export default function LoginPage({ saleInfo }) {
       <LoginBox>
         <p>Olá, digite seu e-mail e senha</p>
         <form onSubmit={loginUser}>
-          <input
-            className="inputs"
-            placeholder="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={enable}
-            required
-          />
-          <input
-            className="inputs"
-            placeholder="senha"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={enable}
-            required
-          />
+          <div className="label-input">
+            <label for="email">Email</label>
+            <input
+              className="inputs"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
+          <div className="label-input">
+            <label for="password">Senha</label>
+            <input
+              className="inputs"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={enable}
+              required
+            />
+          </div>
           <button type="submit" disabled={enable}>
             Entrar
           </button>
