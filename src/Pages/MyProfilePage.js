@@ -1,36 +1,54 @@
 import { Container } from "../Components/styledComponents.js";
-import { HeaderComponent } from "../Components/components.js";
+import { HeaderComponent, ProfileItens } from "../Components/components.js";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function MyProfilePage() {
+  const [sideBarSelected, setSideBarSelected] = useState("Seus Dados");
+  const [selectedItem, setSelectedItem] = useState(false);
   return (
     <Container>
       <HeaderComponent />
-      <MyProfileDiv>
-        <ul className="sidebar">
-          <li>
-            <ion-icon name="person-circle-outline"></ion-icon>
-            <button>Seus Dados</button>
-          </li>
-          <li>
-            <ion-icon name="home-outline"></ion-icon>
-            <button>Endereço</button>
-          </li>
-          <li>
-            <ion-icon name="cart-outline"></ion-icon>
-            <button>Pedidos</button>
-          </li>
-        </ul>
-      </MyProfileDiv>
+      <MyProfileSection>
+        <SideBar>
+          <ul className="sidebar">
+            <ProfileItens
+              name="Seus Dados"
+              icon="person-circle-outline"
+              setSelectedItem={setSelectedItem}
+              selectedItem={selectedItem}
+            />
+            <ProfileItens
+              name="Endereço"
+              icon="home-outline"
+              setSelectedItem={setSelectedItem}
+              selectedItem={selectedItem}
+            />
+            <ProfileItens
+              name="Pedidos"
+              icon="cart-outline"
+              setSelectedItem={setSelectedItem}
+              selectedItem={selectedItem}
+            />
+          </ul>
+        </SideBar>
+
+        <DataDiv>
+          <p>{sideBarSelected}</p>
+        </DataDiv>
+      </MyProfileSection>
     </Container>
   );
 }
 
+const MyProfileSection = styled.section`
+  display: flex;
+  margin: 25px 0 0 15px;
+`;
 
-const MyProfileDiv = styled.div`
+const SideBar = styled.div`
   .sidebar {
     border-radius: 5px;
-    margin: 25px 0 0 15px;
     width: 200px;
     height: 200px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
@@ -39,35 +57,14 @@ const MyProfileDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    button{
-        width: 120px;
-        text-align: left;
-        border: none;
-        background-color: #FFFFFF;
-        font-size: 18px;
-
-        :hover{
-            cursor: pointer;
-            text-decoration: underline;
-        }
-    }
-
-    ion-icon {
-      font-size: 26px;
-    }
-
-    li {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 180px;
-      height: 50px;
-      border-bottom: 1px solid #c6c6c6;
-
-      :last-child {
-        border: none;
-      }
-    }
   }
+`;
+
+const DataDiv = styled.div`
+  height: 450px;
+  width: 520px;
+  border-radius: 5px;
+  margin-left: 150px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 `;
