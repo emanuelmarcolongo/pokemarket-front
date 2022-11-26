@@ -1,4 +1,5 @@
 import { Container, LoginBox } from "../Components/styledComponents.js";
+import {HeaderComponent} from '../Components/components.js'
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
@@ -38,6 +39,7 @@ export default function LoginPage({ saleInfo }) {
 
   return (
     <Container>
+      <HeaderComponent />
       <LoginBox>
         <p>Olá, digite seu e-mail e senha</p>
         <form onSubmit={loginUser}>
