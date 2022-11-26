@@ -1,7 +1,8 @@
-import { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { ColorRing } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { pokeProducts } from "../assets/mockDados.js";
 import { Footer, HeaderComponent } from "../Components/components.js";
 import {
   CarrinhoContainer,
@@ -9,11 +10,29 @@ import {
   ContentContainer,
   ProductContainer,
 } from "../Components/styledComponents.js";
+import { AuthContext } from "../Providers/Auth.js";
 
 let soma = 0;
+
+
+
 export default function HomePage({ saleInfo }) {
   const navigate = useNavigate();
+  const [allProducts, setAllProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
+  const {userData} = React.useContext(AuthContext);
+
+  useEffect (() => {
+    axios.get("https://pokemarket-back.onrender.com/products", { headers: { Authorization: `Bearer ${userData.token}`} })
+    .then( res => {
+        console.log(userData.token)
+       setAllProducts(res.data);
+      
+}
+    )
+    .catch ( err => console.log(err.message));
+}, [])
+
 
   totalCart();
 
@@ -58,7 +77,17 @@ export default function HomePage({ saleInfo }) {
       <HeaderComponent />
       <ContentContainer>
         <ProductContainer>
-          {pokeProducts.map((i, idx) => (
+          {(allProducts.length===0) ? 
+          <ColorRing
+          visible={true}
+          height="200"
+          width="200"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+          :allProducts.map((i, idx) => (
             <PokeCard
               cart={cartProducts}
               setCart={setCartProducts}
