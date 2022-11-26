@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { pokeProducts } from "../assets/mockDados.js";
@@ -9,11 +10,28 @@ import {
   ContentContainer,
   ProductContainer,
 } from "../Components/styledComponents.js";
+import { URL_BASE } from "../Constants/url.js";
+import { AuthContext } from "../Providers/Auth.js";
 
 let soma = 0;
+
 export default function HomePage({ saleInfo }) {
   const navigate = useNavigate();
+  const [allProducts, setAllProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
+  const {userData} = React.useContext(AuthContext);
+
+  useEffect (() => {
+    axios.get("https://pokemarket-back.onrender.com/products", { headers: { Authorization: `Bearer ${userData.token}`} })
+    .then( res => {
+        console.log(userData.token)
+       setAllProducts(res.data);
+      
+}
+    )
+    .catch ( err => console.log(err.message));
+}, [])
+
 
   totalCart();
 
@@ -58,7 +76,7 @@ export default function HomePage({ saleInfo }) {
       <HeaderComponent />
       <ContentContainer>
         <ProductContainer>
-          {pokeProducts.map((i, idx) => (
+          {allProducts.map((i, idx) => (
             <PokeCard
               cart={cartProducts}
               setCart={setCartProducts}

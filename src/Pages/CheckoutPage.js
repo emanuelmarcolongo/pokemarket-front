@@ -27,7 +27,7 @@ export default function CheckoutPage({ saleInfo }) {
    
     axios.post(`${URL_BASE}/sale`, saleInfo).then(
         (res) => {
-            console.log(res.data)
+            console.log(res.data);
         }
     ).catch((err) => {
         console.log(err.response.data.message);
