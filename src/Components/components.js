@@ -61,7 +61,7 @@ export function ProfileItens({ name, icon }) {
   const [selected, setSelected] = useState("Seus Dados");
 
 
-  function selectItem() {
+  function selectItem(e) {
     setSelected(name);
   }
   return (
