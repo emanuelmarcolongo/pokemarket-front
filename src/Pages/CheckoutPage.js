@@ -3,6 +3,9 @@ import { Footer, HeaderComponent } from "../Components/components.js";
 import { Container } from "../Components/styledComponents.js";
 import dayjs from "dayjs";
 import { useState } from "react";
+import axios from "axios";
+import { URL_BASE } from "../Constants/url.js";
+
 
 export default function CheckoutPage({ saleInfo }) {
   const [adress, setAdress] = useState({
@@ -21,7 +24,14 @@ export default function CheckoutPage({ saleInfo }) {
     });
     saleInfo.adress = adress;
     saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
-    console.log(saleInfo);
+   
+    axios.post(`${URL_BASE}/sale`, saleInfo).then(
+        (res) => {
+            console.log(res.data)
+        }
+    ).catch((err) => {
+        console.log(err.response.data.message);
+    })
   }
 
   return (
