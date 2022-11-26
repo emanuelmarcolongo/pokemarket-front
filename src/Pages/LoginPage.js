@@ -5,7 +5,7 @@ import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
 import { AuthContext } from "../Providers/Auth.js";
 
-export default function LoginPage() {
+export default function LoginPage({ saleInfo }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [enable, setEnable] = useState(false);
@@ -24,11 +24,14 @@ export default function LoginPage() {
     axios
       .post(`${URL_BASE}/login`, newLogin)
       .then((res) => {
-        setUserData(res.data);
+        const {token, name, email} = res.data
+        saleInfo.name = name;
+        saleInfo.email = email;
+        setUserData(res.data)
         navigate("/home");
       })
-      .catch((e) => {
-        console.log(e.response.data.message);
+      .catch((err) => {
+        console.log(err);
         setEnable(false);
       });
   }
@@ -56,7 +59,9 @@ export default function LoginPage() {
             disabled={enable}
             required
           />
-          <button type="submit" disabled={enable}>Entrar</button>
+          <button type="submit" disabled={enable}>
+            Entrar
+          </button>
         </form>
         <Link to="/cadastro">
           <button className="button_sign-up">
