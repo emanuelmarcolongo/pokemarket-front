@@ -4,6 +4,7 @@ import { createMemoryHistory } from "@remix-run/router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { URL_BASE } from "../Constants/url.js";
 
 export default function AdressComponent({
   changeBox,
@@ -21,7 +22,7 @@ export default function AdressComponent({
 
     delete user.passwordCheck;
 
-    axios.post("http://localhost:5000/sign-up", user).then((res) => {
+    axios.post(`${URL_BASE}/sign-up`, user).then((res) => {
       navigate("/");
     }).catch((e) => {
       console.log(e)
