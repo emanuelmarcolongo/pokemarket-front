@@ -8,9 +8,6 @@ export default function UserData({nameSelected}){
     return(
         <DataDiv>
           <p>{nameSelected}</p>
-
-          <p>{userData.name}</p>
-          <p>{userData.email}</p>
         </DataDiv>
     )
 };

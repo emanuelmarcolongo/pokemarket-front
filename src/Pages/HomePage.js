@@ -21,6 +21,10 @@ export default function HomePage({ saleInfo }) {
   const { userData } = React.useContext(AuthContext);
 
   useEffect(() => {
+    if(userData.token === undefined){
+      navigate("/")
+    }
+
     axios
       .get("https://pokemarket-back.onrender.com/products", {
         headers: { Authorization: `Bearer ${userData.token}` },
