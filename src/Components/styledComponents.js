@@ -128,13 +128,14 @@ export const ContentContainer = styled.div`
 
 export const LoginBox = styled.div`
   width: 480px;
-  height: 530px;
+  height: 570px;
   border-radius: 8px;
   margin: 0 auto;
   margin-top: 50px;
   padding: 0 15px;
   font-size: 26px;
   display: flex;
+  display: ${(props) => props.showContainer};
   flex-direction: column;
   align-items: center;
   justify-content: center;
