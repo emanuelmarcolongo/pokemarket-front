@@ -6,9 +6,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
 import { AuthContext } from "../Providers/Auth.js";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage({ saleInfo }) {
   const { userData } = React.useContext(AuthContext);
+  const navigate = useNavigate()
+
 
   const [adress, setAdress] = useState({
     rua: saleInfo.adress.rua,
@@ -24,6 +27,10 @@ export default function CheckoutPage({ saleInfo }) {
       ...adress,
       [e.target.name]: e.target.value,
     });
+  }
+  
+  function submitCheckout(e){
+    e.preventDefault()
     saleInfo.adress = adress;
     saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
 
@@ -31,7 +38,10 @@ export default function CheckoutPage({ saleInfo }) {
       .post(`${URL_BASE}/sale`, saleInfo, {
         headers: { Authorization: `Bearer ${userData.token}` },
       })
-      .then(() => {})
+      .then(() => {
+        navigate("/home")
+        console.log(saleInfo)
+      })
       .catch((err) => {
         console.log(err.response.data.message);
       });
@@ -53,7 +63,7 @@ export default function CheckoutPage({ saleInfo }) {
         </Column>
       </InfoProduct>
       <InfoAdress>
-        <form onSubmit={handleCheckout}>
+        <form onSubmit={submitCheckout}>
           <p>Informações de entrega:</p>
           <input
             name="cidade"
