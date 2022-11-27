@@ -13,7 +13,7 @@ export default function SalesData({ handleBox, saleInfo }) {
 
   useEffect(() => {
     axios.get(`${URL_BASE}/sale`,config).then((res) => {
-      console.log(res.data[6].total)
+      console.log(res.data)
     })
   }, [handleBox]);
 
