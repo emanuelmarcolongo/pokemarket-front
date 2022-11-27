@@ -45,7 +45,6 @@ export default function HomePage({ saleInfo }) {
 
     saleInfo.products = [...cartProducts];
     saleInfo.total = Number(soma);
-    console.log(saleInfo);
     navigate("/checkout");
   }
 

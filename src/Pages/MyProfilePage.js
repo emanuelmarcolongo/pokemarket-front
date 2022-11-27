@@ -13,6 +13,7 @@ export default function MyProfilePage({saleInfo}) {
   const [selectedItem, setSelectedItem] = useState("Seus Dados");
   const { userData } = React.useContext(AuthContext);
   const navigate = useNavigate();
+  console.log(typeof(saleInfo.total))
 
   useEffect(() => {
     if (userData.token === undefined) {

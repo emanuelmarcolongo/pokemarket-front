@@ -13,9 +13,9 @@ export default function SalesData({ handleBox, saleInfo }) {
 
   useEffect(() => {
     axios.get(`${URL_BASE}/sale`,config).then((res) => {
-      console.log(res.data)
+      console.log(res.data[6].total)
     })
-  }, []);
+  }, [handleBox]);
 
   return (
     <DataDiv enable={handleBox}>
