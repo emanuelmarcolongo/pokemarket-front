@@ -31,9 +31,7 @@ export default function CheckoutPage({ saleInfo }) {
       .post(`${URL_BASE}/sale`, saleInfo, {
         headers: { Authorization: `Bearer ${userData.token}` },
       })
-      .then((res) => {
-        console.log(res.data);
-      })
+      .then(() => {})
       .catch((err) => {
         console.log(err.response.data.message);
       });
@@ -148,7 +146,6 @@ const InfoProduct = styled.div`
   justify-content: center;
   margin: 0 auto;
 
-
   img {
     width: 100px;
     height: 100px;
@@ -180,10 +177,10 @@ const InfoAdress = styled.div`
   justify-content: center;
   margin: 0 auto;
 
-  .payment{
+  .payment {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
   }
   form {
     display: flex;

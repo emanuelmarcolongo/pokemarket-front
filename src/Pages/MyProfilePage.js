@@ -4,9 +4,10 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { AuthContext } from "../Providers/Auth.js";
 import React from "react";
-import UserData from "../Components/UserData.js";
-import AdressData from "../Components/AdressData.js";
+import UserData from "../Components/UserDataComponent.js";
+import AdressData from "../Components/AdressDataComponent.js";
 import { useNavigate } from "react-router-dom";
+import SalesData from "../Components/SalesDataComponent.js";
 
 export default function MyProfilePage({saleInfo}) {
   const [selectedItem, setSelectedItem] = useState("Seus Dados");
@@ -54,6 +55,7 @@ export default function MyProfilePage({saleInfo}) {
           <h1>{selectedItem}</h1>
           <UserData handleBox={selectedItem === "Seus Dados" ? "" : "none"} />
           <AdressData saleInfo={saleInfo} handleBox={selectedItem === "Endereço" ? "" : "none"} />
+          <SalesData saleInfo={saleInfo} handleBox={selectedItem=== "Pedidos" ? "" : "none"} />
         </BoxData>
       </MyProfileSection>
     </Container>
