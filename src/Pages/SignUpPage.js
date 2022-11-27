@@ -13,13 +13,6 @@ export default function SignUpPage() {
     email: "",
     password: "",
     passwordCheck: "",
-    adress: {
-      city:"",
-      state:"",
-      CEP: "",
-      street: "",
-      number: "",
-    },
   });
   const [changeBox, setChangeBox] = useState(false);
   const navigate = useNavigate();
@@ -28,12 +21,6 @@ export default function SignUpPage() {
     <Container>
       <HeaderComponent />
       <SignUpComponent
-        user={user}
-        setUser={setUser}
-        changeBox={changeBox}
-        setChangeBox={setChangeBox}
-      />
-      <AdressComponent
         user={user}
         setUser={setUser}
         changeBox={changeBox}

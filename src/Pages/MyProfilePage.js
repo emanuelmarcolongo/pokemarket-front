@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { AuthContext } from "../Providers/Auth.js";
 import React from "react";
 import UserData from "../Components/UserData.js";
+import AdressData from "../Components/AdressData.js";
 import { useNavigate } from "react-router-dom";
 
 export default function MyProfilePage() {
@@ -49,7 +50,11 @@ export default function MyProfilePage() {
           </ul>
         </SideBar>
 
-        <UserData nameSelected={selectedItem} />
+        <BoxData>
+          <h1>{selectedItem}</h1>
+          <UserData handleBox={selectedItem === "Seus Dados" ? "" : "none"} />
+          <AdressData handleBox={selectedItem === "Endereço" ? "" : "none"} />
+        </BoxData>
       </MyProfileSection>
     </Container>
   );
@@ -108,5 +113,19 @@ const ItensSideBar = styled.li`
       cursor: pointer;
       text-decoration: underline;
     }
+  }
+`;
+
+const BoxData = styled.div`
+  height: 450px;
+  width: 520px;
+  border-radius: 5px;
+  margin-left: 150px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+  h1 {
+    font-size: 24px;
+    margin: 10px;
   }
 `;

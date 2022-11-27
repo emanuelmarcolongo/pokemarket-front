@@ -1,4 +1,4 @@
-import styled from "styled-components";
+/* import styled from "styled-components";
 import { useState } from "react";
 import { createMemoryHistory } from "@remix-run/router";
 import { Link } from "react-router-dom";
@@ -225,3 +225,4 @@ export const SignUpBox = styled.div`
     cursor: pointer;
   }
 `;
+ */

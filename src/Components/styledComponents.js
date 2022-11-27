@@ -135,7 +135,6 @@ export const LoginBox = styled.div`
   padding: 0 15px;
   font-size: 26px;
   display: flex;
-  display: ${(props) => props.showContainer};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -212,5 +211,27 @@ export const LoginBox = styled.div`
 
   button:hover {
     cursor: pointer;
+  }
+`;
+export const DataDiv = styled.div`
+display: ${(props) => props.enable};
+  .data-box-user {
+    margin: 15px;
+    width: 480px;
+    height: 50px;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #c6c6c6;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+
+    h2{
+      width: 230px;
+    }
+
+    p{
+      text-align: left;
+    }
   }
 `;
