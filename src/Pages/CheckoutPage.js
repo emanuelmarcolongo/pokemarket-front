@@ -11,11 +11,11 @@ export default function CheckoutPage({ saleInfo }) {
   const { userData } = React.useContext(AuthContext);
 
   const [adress, setAdress] = useState({
-    rua: "",
-    cidade: "",
-    estado: "",
-    cep: "",
-    numero: "",
+    rua: saleInfo.adress.rua,
+    cidade: saleInfo.adress.cidade,
+    estado: saleInfo.adress.estado,
+    cep: saleInfo.adress.cep,
+    numero: saleInfo.adress.numero,
   });
 
   function handleCheckout(e) {
@@ -101,27 +101,33 @@ export default function CheckoutPage({ saleInfo }) {
           <div className="payment">
             <label for="credit-card">Cartão de Crédito</label>
             <input
-              type="checkbox"
+              type="radio"
+              value="Cartão de Crédito"
+              name="payment"
               id="credit-card"
-              onChange={(e) => (saleInfo.paymentMethod = "Cartão de Credito")}
+              onChange={(e) => (saleInfo.paymentMethod = e.target.value)}
             ></input>
           </div>
 
           <div className="payment">
-            <label for="credit-card">Pix</label>
+            <label for="pix">Pix</label>
             <input
-              type="checkbox"
-              id="credit-card"
-              onChange={(e) => (saleInfo.paymentMethod = "Pix")}
+              type="radio"
+              value="Pix"
+              name="payment"
+              id="pix"
+              onChange={(e) => (saleInfo.paymentMethod = e.target.value)}
             ></input>
           </div>
 
           <div className="payment">
-            <label for="credit-card">Boleto</label>
+            <label for="boleto">Boleto</label>
             <input
-              type="checkbox"
-              id="credit-card"
-              onChange={(e) => (saleInfo.paymentMethod = "Boleto")}
+              type="radio"
+              value="Boleto"
+              name="payment"
+              id="boleto"
+              onChange={(e) => (saleInfo.paymentMethod = e.target.value)}
             ></input>
           </div>
 

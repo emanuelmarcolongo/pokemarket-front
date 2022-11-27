@@ -8,7 +8,7 @@ import UserData from "../Components/UserData.js";
 import AdressData from "../Components/AdressData.js";
 import { useNavigate } from "react-router-dom";
 
-export default function MyProfilePage() {
+export default function MyProfilePage({saleInfo}) {
   const [selectedItem, setSelectedItem] = useState("Seus Dados");
   const { userData } = React.useContext(AuthContext);
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function MyProfilePage() {
         <BoxData>
           <h1>{selectedItem}</h1>
           <UserData handleBox={selectedItem === "Seus Dados" ? "" : "none"} />
-          <AdressData handleBox={selectedItem === "Endereço" ? "" : "none"} />
+          <AdressData saleInfo={saleInfo} handleBox={selectedItem === "Endereço" ? "" : "none"} />
         </BoxData>
       </MyProfileSection>
     </Container>
