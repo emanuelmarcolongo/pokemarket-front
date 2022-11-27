@@ -7,10 +7,8 @@ import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
 import { AuthContext } from "../Providers/Auth.js";
 
-
 export default function CheckoutPage({ saleInfo }) {
-
-  const {userData} = React.useContext(AuthContext);
+  const { userData } = React.useContext(AuthContext);
 
   const [adress, setAdress] = useState({
     rua: "",
@@ -28,14 +26,17 @@ export default function CheckoutPage({ saleInfo }) {
     });
     saleInfo.adress = adress;
     saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
-   
-    axios.post(`${URL_BASE}/sale`, saleInfo, { headers: { Authorization: `Bearer ${userData.token}`} }).then(
-        (res) => {
-            console.log(res.data);
-        }
-    ).catch((err) => {
+
+    axios
+      .post(`${URL_BASE}/sale`, saleInfo, {
+        headers: { Authorization: `Bearer ${userData.token}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
         console.log(err.response.data.message);
-    })
+      });
   }
 
   return (
@@ -97,11 +98,32 @@ export default function CheckoutPage({ saleInfo }) {
             placeholder="Digite seu Número"
           ></input>
           <p>Forma de pagamento:</p>
-          <input
-            type="string"
-            onChange={(e) => (saleInfo.paymentMethod = e.target.value)}
-            placeholder="Qual a forma de pagamento?"
-          ></input>
+          <div className="payment">
+            <label for="credit-card">Cartão de Crédito</label>
+            <input
+              type="checkbox"
+              id="credit-card"
+              onChange={(e) => (saleInfo.paymentMethod = "Cartão de Credito")}
+            ></input>
+          </div>
+
+          <div className="payment">
+            <label for="credit-card">Pix</label>
+            <input
+              type="checkbox"
+              id="credit-card"
+              onChange={(e) => (saleInfo.paymentMethod = "Pix")}
+            ></input>
+          </div>
+
+          <div className="payment">
+            <label for="credit-card">Boleto</label>
+            <input
+              type="checkbox"
+              id="credit-card"
+              onChange={(e) => (saleInfo.paymentMethod = "Boleto")}
+            ></input>
+          </div>
 
           <button type="submit">Finalizar compra!</button>
         </form>
@@ -119,6 +141,7 @@ const InfoProduct = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+
 
   img {
     width: 100px;
@@ -150,6 +173,12 @@ const InfoAdress = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+
+  .payment{
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
   form {
     display: flex;
     flex-direction: column;
