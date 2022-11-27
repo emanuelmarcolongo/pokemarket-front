@@ -30,7 +30,6 @@ export default function HomePage({ saleInfo }) {
         headers: { Authorization: `Bearer ${userData.token}` },
       })
       .then((res) => {
-        console.log(userData.token);
         setAllProducts(res.data);
       })
       .catch((err) => console.log(err.message));

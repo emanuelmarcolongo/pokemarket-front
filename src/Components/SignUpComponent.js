@@ -4,12 +4,7 @@ import { LoginBox } from "./styledComponents.js";
 import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
 
-export default function SignUpComponent({
-  user,
-  setUser,
-  changeBox,
-  setChangeBox,
-}) {
+export default function SignUpComponent({ user, setUser }) {
   const { name, url, email, password, passwordCheck } = user;
   const [enable, setEnable] = useState(false);
   const navigate = useNavigate();
@@ -20,13 +15,20 @@ export default function SignUpComponent({
       alert("As senhas não conferem");
       return;
     }
-    setChangeBox(true);
+    setEnable(true);
+    delete user.passwordCheck;
+    axios
+      .post(`${URL_BASE}/sign-up`, user)
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        setEnable(false);
+      });
   }
   return (
-    <LoginBox
-      showContainer={changeBox ? "none" : ""}
-      checkPassword={password === passwordCheck ? "none" : ""}
-    >
+    <LoginBox checkPassword={password === passwordCheck ? "none" : ""}>
       <p>Preencha todos os campos para realizar o cadastro</p>
       <form onSubmit={signUpUser}>
         <div className="label-input">
