@@ -29,7 +29,7 @@ export default function SalesData({ handleBox }) {
           <ProductsList products={e} />
           <div className="total">
             <p>Valor Total</p>
-            <p>R$ {e.total.toFixed(2)}</p>
+            <p>R$ {e.total}</p>
           </div>
           <p>Data da Compra: {e.time}</p>
         </div>
