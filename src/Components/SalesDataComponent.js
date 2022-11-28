@@ -32,6 +32,7 @@ export default function SalesData({ handleBox }) {
             <p>R${e.total}</p>
           </div>
           <p>Data da Compra: {e.time}</p>
+          <p>Forma de Pagamento: {e.paymentMethod}</p>
         </div>
       ))}
     </SalesDiv>
@@ -44,11 +45,13 @@ const SalesDiv = styled.div`
   .data-box {
     border-bottom: 1px solid #c6c6c6;
     padding-bottom: 10px;
+    width: 500px;
+    margin: 0 auto 10px auto;
   }
 
   .total {
     font-size: 18px;
-    margin: 15px 25px 10px 15px;
+    margin: 10px 25px 10px 15px;
     display: flex;
     justify-content: space-between;
   }
@@ -58,6 +61,8 @@ const SalesDiv = styled.div`
     margin: 0 auto;
 
     .products-list {
+
+      background-color: rgb(255 240 250);
       li {
         display: flex;
         justify-content: space-between;
