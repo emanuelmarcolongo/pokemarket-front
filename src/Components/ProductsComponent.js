@@ -12,7 +12,7 @@ export default function ProductsList({ products }) {
             <p>{p.name}</p>
             <div>
               <p>{p.amount}</p>
-              <p>R$ {p.value.toFixed(2)}</p>
+              <p>R$ {p.value}</p>
             </div>
           </li>
         ))}
