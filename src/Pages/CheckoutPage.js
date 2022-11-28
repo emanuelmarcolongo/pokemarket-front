@@ -14,11 +14,11 @@ export default function CheckoutPage({ saleInfo }) {
   const config = { headers: { Authorization: `Bearer ${userData.token}` } };
 
   const [adress, setAdress] = useState({
-    rua: saleInfo.adress.rua,
-    cidade: saleInfo.adress.cidade,
-    estado: saleInfo.adress.estado,
-    cep: saleInfo.adress.cep,
-    numero: saleInfo.adress.numero,
+    rua: "",
+    cidade: "",
+    estado: "",
+    cep: "",
+    numero:"",
   });
 
   function handleCheckout(e) {
@@ -32,7 +32,7 @@ export default function CheckoutPage({ saleInfo }) {
   function submitCheckout(e) {
     e.preventDefault();
     saleInfo.adress = adress;
-    saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
+    saleInfo.time = dayjs().format("DD/MM/YYYY")
 
     axios
       .post(`${URL_BASE}/sale`, saleInfo, config)

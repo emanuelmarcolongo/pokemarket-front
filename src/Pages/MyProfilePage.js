@@ -1,5 +1,5 @@
 import { Container } from "../Components/styledComponents.js";
-import { HeaderComponent, ProfileItens } from "../Components/components.js";
+import { HeaderComponent } from "../Components/components.js";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { AuthContext } from "../Providers/Auth.js";
@@ -13,7 +13,6 @@ export default function MyProfilePage({saleInfo}) {
   const [selectedItem, setSelectedItem] = useState("Seus Dados");
   const { userData } = React.useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(typeof(saleInfo.total))
 
   useEffect(() => {
     if (userData.token === undefined) {
@@ -21,9 +20,6 @@ export default function MyProfilePage({saleInfo}) {
     }
   }, []);
 
-  function handleButton(name) {
-    setSelectedItem(name);
-  }
   return (
     <Container>
       <HeaderComponent />
@@ -33,7 +29,7 @@ export default function MyProfilePage({saleInfo}) {
             <ItensSideBar disable={selectedItem === "Seus Dados" ? "" : "none"}>
               <div className="line" />
               <ion-icon name="person-circle-outline"></ion-icon>
-              <button onClick={() => handleButton("Seus Dados")}>
+              <button onClick={() => setSelectedItem("Seus Dados")}>
                 Seus Dados
               </button>
             </ItensSideBar>
@@ -41,13 +37,13 @@ export default function MyProfilePage({saleInfo}) {
             <ItensSideBar disable={selectedItem === "Endereço" ? "" : "none"}>
               <div className="line" />
               <ion-icon name="home-outline"></ion-icon>
-              <button onClick={() => handleButton("Endereço")}>Endereço</button>
+              <button onClick={() => setSelectedItem("Endereço")}>Endereço</button>
             </ItensSideBar>
 
             <ItensSideBar disable={selectedItem === "Pedidos" ? "" : "none"}>
               <div className="line" />
               <ion-icon name="cart-outline"></ion-icon>
-              <button onClick={() => handleButton("Pedidos")}>Pedidos</button>
+              <button onClick={() => setSelectedItem("Pedidos")}>Pedidos</button>
             </ItensSideBar>
           </ul>
         </SideBar>
