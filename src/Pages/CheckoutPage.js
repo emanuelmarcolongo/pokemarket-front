@@ -24,7 +24,7 @@ export default function CheckoutPage({ saleInfo }) {
       const newAdress = res.data;
       setAdress(newAdress)
     });
-  }, []);
+  }, [config]);
 
   function handleCheckout(e) {
     e.preventDefault();
