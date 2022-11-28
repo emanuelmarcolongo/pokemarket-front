@@ -21,12 +21,11 @@ export default function SalesData({ handleBox }) {
       setSalesProducts(products);
     });
   }, []);
-  console.log(salesUser);
   return (
     <SalesDiv enable={handleBox}>
       {salesUser.map((e) => (
         <div className="data-box">
-          <ProductsList products={e} />
+          <ProductsList products={e} key={e.id}/>
           <div className="total">
             <p>Valor Total</p>
             <p>R${e.total}</p>

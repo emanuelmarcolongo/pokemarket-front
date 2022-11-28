@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Footer, HeaderComponent } from "../Components/components.js";
 import { Container } from "../Components/styledComponents.js";
 import dayjs from "dayjs";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { URL_BASE } from "../Constants/url.js";
 import { AuthContext } from "../Providers/Auth.js";
@@ -12,14 +12,19 @@ export default function CheckoutPage({ saleInfo }) {
   const { userData } = React.useContext(AuthContext);
   const navigate = useNavigate();
   const config = { headers: { Authorization: `Bearer ${userData.token}` } };
-
   const [adress, setAdress] = useState({
     rua: "",
     cidade: "",
     estado: "",
     cep: "",
-    numero:"",
+    numero: "",
   });
+  useEffect(() => {
+    axios.get(`${URL_BASE}/adress`, config).then((res) => {
+      const newAdress = res.data;
+      setAdress(newAdress)
+    });
+  }, []);
 
   function handleCheckout(e) {
     e.preventDefault();
@@ -32,7 +37,7 @@ export default function CheckoutPage({ saleInfo }) {
   function submitCheckout(e) {
     e.preventDefault();
     saleInfo.adress = adress;
-    saleInfo.time = dayjs().format("DD/MM/YYYY")
+    saleInfo.time = dayjs().format("DD/MM/YYYY");
 
     axios
       .post(`${URL_BASE}/sale`, saleInfo, config)
