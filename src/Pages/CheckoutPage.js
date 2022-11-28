@@ -10,15 +10,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage({ saleInfo }) {
   const { userData } = React.useContext(AuthContext);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const config = { headers: { Authorization: `Bearer ${userData.token}` } };
 
   const [adress, setAdress] = useState({
-    rua: saleInfo.adress.rua,
-    cidade: saleInfo.adress.cidade,
-    estado: saleInfo.adress.estado,
-    cep: saleInfo.adress.cep,
-    numero: saleInfo.adress.numero,
+    rua: "",
+    cidade: "",
+    estado: "",
+    cep: "",
+    numero:"",
   });
 
   function handleCheckout(e) {
@@ -28,22 +28,29 @@ export default function CheckoutPage({ saleInfo }) {
       [e.target.name]: e.target.value,
     });
   }
-  
-  function submitCheckout(e){
-    e.preventDefault()
+
+  function submitCheckout(e) {
+    e.preventDefault();
     saleInfo.adress = adress;
-    saleInfo.time = dayjs().format("DD/MM/YYYY  HH:mm");
+    saleInfo.time = dayjs().format("DD/MM/YYYY")
 
     axios
-      .post(`${URL_BASE}/sale`, saleInfo, {
-        headers: { Authorization: `Bearer ${userData.token}` },
-      })
+      .post(`${URL_BASE}/sale`, saleInfo, config)
       .then(() => {
-        navigate("/home")
-        console.log(saleInfo)
+        navigate("/home");
+        console.log(saleInfo);
       })
       .catch((err) => {
         console.log(err.response.data.message);
+      });
+
+    axios
+      .put(`${URL_BASE}/adress`, adress, config)
+      .then(() => {
+        console.log("Endereço Atualizado");
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }
 
