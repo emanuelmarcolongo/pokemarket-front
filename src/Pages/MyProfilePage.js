@@ -116,7 +116,6 @@ const ItensSideBar = styled.li`
 `;
 
 const BoxData = styled.div`
-  height: 450px;
   width: 520px;
   border-radius: 5px;
   margin-left: 150px;
